@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from config_reader import config
+from config import config
 from handlers import common
 
 async def main():
