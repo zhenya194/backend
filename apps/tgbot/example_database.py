@@ -8,7 +8,7 @@ class Database:
         self.create_tables()
 
     def create_tables(self):
-        self.cursor.users("""
+        self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
                 user_id INTEGER PRIMARY KEY,
                 full_name TEXT,
@@ -16,7 +16,7 @@ class Database:
             )
         """)
 
-        self.cursor.fb("""
+        self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS feedback (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER,
@@ -29,7 +29,7 @@ class Database:
         self.conn.commit()
 
     def add_user(self, user_id, full_name):
-        self.cursor.users(
+        self.cursor.execute(
             "INSERT OR IGNORE INTO users (user_id, full_name, is_subscribed) VALUES (?, ?, 1)", 
             (user_id, full_name)
         )
@@ -37,7 +37,7 @@ class Database:
 
     def add_feedback(self, user_id, user_name, text):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.cursor.fb(
+        self.cursor.execute(
             "INSERT INTO feedback (user_id, user_name, text, timestamp) VALUES (?, ?, ?, ?)",
             (user_id, user_name, text, timestamp)
         )
