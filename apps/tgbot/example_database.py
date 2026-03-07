@@ -15,9 +15,11 @@ class Database:
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
                 user_id INTEGER PRIMARY KEY,
-                full_name TEXT,
+                full_name TEXT
             )
         """)
+
+        self.conn.commit()
 
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS feedback (
